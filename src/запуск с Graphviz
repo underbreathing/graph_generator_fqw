@@ -1,0 +1,11 @@
+javac -cp "libs/*" -d out src/*.java src/uimodels/*.java
+
+
+jar cfe myapp.jar Main -C out .
+
+java -Dconfig.file=config.properties -cp "myapp.jar;libs/*" Main
+
+
+
+
+ (java -cp "myapp.jar;libs/*" Main)
