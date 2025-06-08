@@ -1,3 +1,5 @@
+import jdk.jshell.execution.Util;
+
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -115,7 +117,7 @@ public class GraphGenerator {
             int last = nextSCC.get(nextSCCsize - 1);
             int first = nextSCC.get(0);
             graph.addNewEdge(last, first);
-            if (isEnabledCycleInCycle && nextSCCsize >= 3) { //слева в условии фича тоггл
+            if (isEnabledCycleInCycle) { //слева в условии фича тоггл
                 if (Utils.rnd.nextInt(1, 101) <= 75) {
                     addInnerCycle(graph, nextSCC);
                 }
@@ -127,49 +129,28 @@ public class GraphGenerator {
     private static void addInnerCycle(Graph graph, List<Integer> nextSSC) {
         int size = nextSSC.size();
 
-        // Оригинальные рёбра цикла
-        Set<Graph.Edge> originalEdges = new HashSet<>();
-        for (int i = 0; i < size; i++) {
-            int from = nextSSC.get(i);
-            int to = nextSSC.get((i + 1) % size);
-            originalEdges.add(new Graph.Edge(from, to));
+        logger.info("size = " + size);
+
+        if (size == 1) {
+            if (Utils.rnd.nextBoolean()) {
+                graph.addNewEdge(nextSSC.get(0), nextSSC.get(0));
+            }
+            return;
         }
 
-        // Кандидаты: все возможные рёбра без петель и не в оригинале
-        Set<Graph.Edge> candidateEdges = new HashSet<>();
-        for (int from : nextSSC) {
-            for (int to : nextSSC) {
-                if (from != to) {
-                    Graph.Edge e = new Graph.Edge(from, to);
-                    if (!originalEdges.contains(e)) {
-                        candidateEdges.add(e);
-                    }
-                }
+        int countOfInnerEdges = Utils.rnd.nextInt(1, size);
+
+        logger.info("count of inner edges = " + countOfInnerEdges);
+
+        for (int i = 0; i < countOfInnerEdges; ++i) {
+            int a = nextSSC.get(Utils.rnd.nextInt(size));
+            int b = nextSSC.get(Utils.rnd.nextInt(size));
+            if (Utils.rnd.nextBoolean()) {
+                graph.addNewEdge(a, b);
+            } else {
+                graph.addNewEdge(b, a);
             }
         }
-
-        // Перемешать и выбрать случайное количество
-        List<Graph.Edge> shuffled = new ArrayList<>(candidateEdges);
-        Collections.shuffle(shuffled);
-        int count = getRandomCountOfInnerEdge(size);
-        logger.info("для SSCsize = " + size + " innerEdges = " + count);
-
-        for (int i = 0; i < count; i++) {
-            Graph.Edge e = shuffled.get(i);
-            graph.addNewEdge(e);
-        }
-    }
-
-    // иммутабельная структура для рёбер с правильными equals/hashCode
-
-    private static int getRandomCountOfInnerEdge(int size) {
-        if (size < 4) {
-            return 1;
-        }
-        if (size < 5) {
-            return Utils.rnd.nextInt(1, 3);
-        }
-        return Utils.rnd.nextInt(1, 4);
     }
 
     private static int calculateNewSCCsize(int remainingNodes) {

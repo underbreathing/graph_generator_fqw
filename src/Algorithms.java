@@ -44,7 +44,7 @@ public class Algorithms {
 
         Set<Graph.Edge> metaEdges = new HashSet<>();
 
-        List<Integer>[] adj = myGraph.adjList;
+        Set<Integer>[] adj = myGraph.adjList;
 
         for (int i = 0; i < adj.length; ++i) {
             int thisSCC = sccIndexes.get(i); // ССК в которой лежит эта вершина
@@ -86,7 +86,7 @@ public class Algorithms {
         System.out.println("Вершины в порядке убывания post-time:" + postTimeDecreased);
     }
 
-    private static void visit(int v, List<Integer>[] adj, Consumer<Integer> previsit, Consumer<Integer> postvisit) {
+    private static void visit(int v, Set<Integer>[] adj, Consumer<Integer> previsit, Consumer<Integer> postvisit) {
         visited[v] = true;
         if (visitedVertices != null) {
             visitedVertices.add(v);

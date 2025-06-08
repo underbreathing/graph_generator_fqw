@@ -14,7 +14,7 @@ public class MetaGraph extends Graph{
 
     public int getEdgesCount(){
         int count = 0;
-        for (List<Integer> adj : adjList) {
+        for (Set<Integer> adj : adjList) {
             for (Integer ignored : adj) {
                 ++count;
             }
