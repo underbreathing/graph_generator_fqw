@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.19)  8 JUN 2025 15:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.19)  8 JUN 2025 15:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -929,7 +929,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 28--29
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--114
+Underfull \hbox (badness 10000) in paragraph at lines 38--102
 
  []
 
@@ -939,30 +939,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 38--114
 
 {C:/Users/artem/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 
-[2]
-
-LaTeX Warning: Command \cyri invalid in math mode on input line 192.
+LaTeX Warning: Command \cyri invalid in math mode on input line 168.
 
 
-LaTeX Warning: Command \cyrs invalid in math mode on input line 192.
+LaTeX Warning: Command \cyrs invalid in math mode on input line 168.
 
 
-LaTeX Warning: Command \cyrh invalid in math mode on input line 192.
+LaTeX Warning: Command \cyrh invalid in math mode on input line 168.
 
 
-LaTeX Warning: Command \cyro invalid in math mode on input line 192.
+LaTeX Warning: Command \cyro invalid in math mode on input line 168.
 
 
-LaTeX Warning: Command \cyrd invalid in math mode on input line 192.
+LaTeX Warning: Command \cyrd invalid in math mode on input line 168.
 
 
-LaTeX Warning: Command \cyrn invalid in math mode on input line 192.
+LaTeX Warning: Command \cyrn invalid in math mode on input line 168.
 
 
-LaTeX Warning: Command \cyrery invalid in math mode on input line 192.
+LaTeX Warning: Command \cyrery invalid in math mode on input line 168.
 
 
-LaTeX Warning: Command \cyrishrt invalid in math mode on input line 192.
+LaTeX Warning: Command \cyrishrt invalid in math mode on input line 168.
 
 Missing character: There is no è in font cmr10!
 Missing character: There is no ñ in font cmr10!
@@ -973,38 +971,28 @@ Missing character: There is no í in font cmr10!
 Missing character: There is no û in font cmr10!
 Missing character: There is no é in font cmr10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--196
+Underfull \hbox (badness 10000) in paragraph at lines 168--172
 
  []
 
 
 
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 199--202
+[2]
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 199--202
-
- []
-
-
-
-[4] (graph_tikz.aux)
+[3] (graph_tikz.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-14>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 19062 strings out of 469940
- 413068 string characters out of 5469409
- 862547 words of memory out of 5000000
- 45538 multiletter control sequences out of 15000+600000
+ 18999 strings out of 469940
+ 411840 string characters out of 5469409
+ 820431 words of memory out of 5000000
+ 45475 multiletter control sequences out of 15000+600000
  629228 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 102i,8n,107p,524b,922s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,8n,107p,450b,920s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\artem\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1000.pk> <C:\Users\artem\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\
 larm1000.pk> <C:\Users\artem\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi
@@ -1013,9 +1001,9 @@ c/amsfonts/cm/cmmi10.pfb><C:/Users/artem/AppData/Local/Programs/MiKTeX/fonts/ty
 pe1/public/amsfonts/cm/cmmi7.pfb><C:/Users/artem/AppData/Local/Programs/MiKTeX/
 fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/artem/AppData/Local/Programs
 /MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on graph_tikz.pdf (4 pages, 87273 bytes).
+Output written on graph_tikz.pdf (3 pages, 81443 bytes).
 PDF statistics:
- 134 PDF objects out of 1000 (max. 8388607)
+ 131 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

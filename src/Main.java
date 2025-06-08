@@ -1,4 +1,5 @@
 import uimodels.Explanation;
+import uimodels.GenerateParameters;
 import uimodels.TaskType;
 
 import javax.swing.*;
@@ -7,10 +8,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Objects;
 import java.util.Properties;
-import java.util.Scanner;
+
 
 public class Main {
 
@@ -26,33 +25,70 @@ public class Main {
     static JTextField optionsField;
     static JComboBox<Explanation> explanationCombo;
 
+    private static boolean isGuiMode;
+
     public static void main(String[] args) {
-
-        //TODO()потом удалить
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите путь до config.properties: ");
-        String configPath = scanner.nextLine().trim();
-
-        System.out.println("Config path: " + configPath);
-        if (configPath == null) {
-            System.err.println("Please provide -Dconfig.file=path/to/config.properties");
-            System.exit(1);
+        if (args.length == 1 && args[0].equals("-gui")) {
+            isGuiMode = true;
+            runGui();
+            return;
         }
+
+        if (args.length == 4 && args[0].equals("-p") && args[2].equals("-o")) {
+            isGuiMode = false;
+            String propertiesPath = args[1];
+            String outputPath = args[3];
+            runCliMode(propertiesPath, outputPath);
+            return;
+        }
+
+        printUsage();
+
+    }
+
+    private static void printUsage() {
+        System.out.println("Использование генератора:");
+        System.out.println("  java -cp \"myapp.jar;libs/*\" Main  -gui");
+        System.out.println("  (запуск графического интерфейса)");
+        System.out.println("   java -cp \"myapp.jar;libs/*\" Main -p <путь к properties-файлу> -o <путь к выходному файлу>");
+        System.out.println("  (режим командной строки)");
+    }
+
+    private static void runCliMode(String propertiesPath, String outputPath) {
 
         Properties props = new Properties();
-        try (FileInputStream input = new FileInputStream(configPath)) {
-            props.load(input);
+
+        try (FileInputStream fis = new FileInputStream(propertiesPath)) {
+            props.load(fis);
+
+            int n = Integer.parseInt(props.getProperty("n"));
+            int vMin = Integer.parseInt(props.getProperty("v_min"));
+            int vMax = Integer.parseInt(props.getProperty("v_max"));
+            boolean generateAnswer = Boolean.parseBoolean(props.getProperty("generate_answer"));
+            String pathToCompiler = props.getProperty("path_to_compiler");
+            Explanation explanation = Explanation.valueOf(props.getProperty("explanation").toUpperCase());
+            TaskType taskType = TaskType.valueOf(props.getProperty("task_type").toUpperCase());
+
+            generate(
+                    new GenerateParameters(
+                            n,
+                            vMin,
+                            vMax,
+                            generateAnswer,
+                            explanation,
+                            pathToCompiler,
+                            taskType
+                    ),
+                    outputPath
+            );
         } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
+            System.err.println("Ошибка при чтении файла: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Ошибка преобразования числа: " + e.getMessage());
         }
+    }
 
-        System.out.println("App Name: " + props.getProperty("app.name"));
-        System.out.println("Version: " + props.getProperty("app.version"));
-        System.out.println("Environment: " + props.getProperty("app.env"));
-        //TODO() потом удалить
-
+    private static void runGui() {
         SwingUtilities.invokeLater(() -> {
             frame = new JFrame("GraphGenerator");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -269,18 +305,35 @@ public class Main {
 
         logParameters(vmin, vmax, generateAnswer, explanation, latexPath, taskType);
 
-        int n = validateN();
+        int n = validateNwithGui();
         if (n == -1) return;
 
-        String outputFilePath = "graph_tikz.tex";
+        generate(
+                new GenerateParameters(
+                        n,
+                        vmin,
+                        vmax,
+                        generateAnswer,
+                        explanation,
+                        latexPath,
+                        taskType
+                ),
+                Globals.outputFilePath
+        );
+    }
 
-        GenerateManager.generate(n, vmin, vmax, generateAnswer, explanation, Objects.requireNonNull(taskType), outputFilePath);
+    private static void generate(GenerateParameters parameters, String outputFilePath) {
+        GenerateManager.generate(parameters, outputFilePath);
 
         //Компилируем и открываем latex файл
 
-        LatexCompiler.compileLatex(latexPath, outputFilePath);
+        LatexCompiler.compileLatex(parameters.latexPath(), outputFilePath);
 
-        openGeneratedPdf(outputFilePath);
+        if (isGuiMode) {
+            openGeneratedPdf(outputFilePath);
+        } else {
+            System.out.println("PDF сгенерирован: " + outputFilePath.replaceAll("\\.[^.]+$", ".pdf"));
+        }
     }
 
     private static void logParameters(int vmin, int vmax, boolean generateAnswer, Explanation explanation, String latexPath, TaskType taskType) {
@@ -293,7 +346,7 @@ public class Main {
     }
 
     private static void openGeneratedPdf(String outputFilePath) {
-        File pdf = new File(outputFilePath.replace(".tex", ".pdf"));
+        File pdf = new File(outputFilePath.replaceAll("\\.[^.]+$", ".pdf"));
         if (pdf.exists()) {
             try {
                 Desktop.getDesktop().open(pdf);
@@ -303,7 +356,7 @@ public class Main {
         }
     }
 
-    private static int validateN() {
+    private static int validateNwithGui() {
         String text = optionsField.getText().trim();
         int value;
         try {
