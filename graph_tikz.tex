@@ -15,8 +15,8 @@
 
 %Начало задания
 \noindent\textbf{Задание.} Дан ориентированный граф $G = (V, E)$, где
-$V$ = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 \} и $E$ = \{(1, 5), (2, 8), (3, 8), (3, 15), (3, 12), (3, 14), (4, 7), (4, 14), (5, 12), (6, 2), (7, 14), (8, 9), (8, 2), (9, 11), (10, 1), (11, 6), (12, 10), (12, 9), (13, 10), (13, 4), (14, 4) \}.\\
-Сколько всего сильно связных компонент в орграфе $G$?
+$V$ = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 \} и $E$ = \{(1, 8), (2, 1), (2, 2), (2, 8), (3, 9), (4, 12), (4, 14), (5, 2), (5, 11), (6, 3), (7, 6), (8, 2), (9, 14), (10, 2), (10, 5), (10, 8), (11, 8), (11, 10), (12, 13), (12, 14), (13, 3), (13, 4), (13, 12), (14, 6), (14, 7) \}.\\
+Сколько всего ребер в метаграфе орграфа $G$?
 \vspace{2mm}
 
 \noindent\begin{inparaenum}[(1)]
@@ -25,13 +25,11 @@ $V$ = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 \} и $E$ = \{(1, 5), 
 
 
 
-\noindent\textbf{Ответ:} (1).\\
+\noindent\textbf{Ответ:} (5).\\
 
 %Конец задания
 
-
-\noindent\textbf{Подробное обоснование.}
-Исходный орграф $G$:
+\noindent\textbf{Краткое обоснование.} Исходный орграф $G$:
 \vspace{8mm}
 
 % Start of code
@@ -40,121 +38,73 @@ $V$ = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 \} и $E$ = \{(1, 5), 
   \pgfsetlinewidth{1bp}
 %
 \pgfsetcolor{black}
-% Edge: 6 -> 2
-\draw [->] (55.472bp,303.700bp) .. controls (56.525bp,296.320bp) and (57.782bp,287.520bp) .. (60.557bp,268.100bp);% Edge: 2 -> 8
-\draw [->] (57.122bp,232.050bp) .. controls (56.328bp,224.570bp) and (56.076bp,215.580bp) .. (57.138bp,195.790bp);% Edge: 8 -> 2
-\draw [->] (68.862bp,195.790bp) .. controls (69.663bp,203.250bp) and (69.922bp,212.240bp) .. (68.878bp,232.050bp);% Edge: 8 -> 9
-\draw [->] (63.000bp,159.700bp) .. controls (63.000bp,152.410bp) and (63.000bp,143.730bp) .. (63.000bp,124.100bp);% Edge: 9 -> 11
-\draw [->] (60.528bp,87.697bp) .. controls (59.475bp,80.322bp) and (58.218bp,71.524bp) .. (55.443bp,52.104bp);% Edge: 11 -> 6
-\draw [->] (41.430bp,50.342bp) .. controls (35.889bp,58.649bp) and (29.851bp,69.368bp) .. (27.000bp,80.000bp) .. controls (4.441bp,164.140bp) and (4.441bp,191.860bp) .. (27.000bp,276.000bp) .. controls (28.826bp,282.810bp) and (31.961bp,289.660bp) .. (41.430bp,305.660bp);% Edge: 14 -> 4
-\draw [->] (311.120bp,160.050bp) .. controls (310.330bp,152.570bp) and (310.080bp,143.580bp) .. (311.140bp,123.790bp);% Edge: 4 -> 14
-\draw [->] (322.860bp,123.790bp) .. controls (323.660bp,131.250bp) and (323.920bp,140.240bp) .. (322.880bp,160.050bp);% Edge: 4 -> 7
-\draw [->] (319.470bp,87.697bp) .. controls (320.530bp,80.322bp) and (321.780bp,71.524bp) .. (324.560bp,52.104bp);% Edge: 7 -> 14
-\draw [->] (338.570bp,50.342bp) .. controls (344.110bp,58.649bp) and (350.150bp,69.368bp) .. (353.000bp,80.000bp) .. controls (358.060bp,98.888bp) and (358.750bp,105.310bp) .. (353.000bp,124.000bp) .. controls (349.820bp,134.350bp) and (343.850bp,144.490bp) .. (330.750bp,162.070bp);% Edge: 1 -> 5
-\draw [->] (148.530bp,303.700bp) .. controls (147.470bp,296.320bp) and (146.220bp,287.520bp) .. (143.440bp,268.100bp);% Edge: 5 -> 12
-\draw [->] (141.000bp,231.700bp) .. controls (141.000bp,224.410bp) and (141.000bp,215.730bp) .. (141.000bp,196.100bp);% Edge: 12 -> 10
-\draw [->] (145.840bp,160.050bp) .. controls (148.000bp,152.490bp) and (150.610bp,143.370bp) .. (156.200bp,123.790bp);% Edge: 10 -> 1
-\draw [->] (168.490bp,123.730bp) .. controls (171.810bp,132.040bp) and (175.340bp,142.360bp) .. (177.000bp,152.000bp) .. controls (186.370bp,206.310bp) and (191.270bp,222.770bp) .. (177.000bp,276.000bp) .. controls (175.170bp,282.810bp) and (172.040bp,289.660bp) .. (162.570bp,305.660bp);% Edge: 12 -> 9
-\draw [->] (125.590bp,163.170bp) .. controls (114.550bp,153.260bp) and (99.474bp,139.730bp) .. (78.645bp,121.040bp);% Edge: 13 -> 4
-\draw [->] (254.410bp,163.170bp) .. controls (265.450bp,153.260bp) and (280.530bp,139.730bp) .. (301.350bp,121.040bp);% Edge: 13 -> 10
-\draw [->] (223.590bp,163.170bp) .. controls (212.550bp,153.260bp) and (197.470bp,139.730bp) .. (176.650bp,121.040bp);% Edge: 3 -> 8
-\draw [->] (254.300bp,240.660bp) .. controls (238.940bp,235.440bp) and (218.440bp,228.820bp) .. (200.000bp,224.000bp) .. controls (156.990bp,212.750bp) and (143.190bp,220.720bp) .. (102.000bp,204.000bp) .. controls (98.041bp,202.390bp) and (94.046bp,200.380bp) .. (80.495bp,192.170bp);% Edge: 3 -> 14
-\draw [->] (287.050bp,232.760bp) .. controls (291.620bp,224.550bp) and (297.290bp,214.370bp) .. (308.000bp,195.150bp);% Edge: 3 -> 12
-\draw [->] (256.890bp,238.220bp) .. controls (234.200bp,226.620bp) and (197.900bp,208.070bp) .. (161.910bp,189.680bp);% Edge: 3 -> 15
-\draw [->] (300.620bp,239.680bp) .. controls (320.770bp,231.130bp) and (350.870bp,217.740bp) .. (376.000bp,204.000bp) .. controls (379.670bp,201.990bp) and (383.470bp,199.770bp) .. (396.670bp,191.490bp);
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v6) at (53.00 bp,322.00 bp) {6};\node (v6) at (53.00 bp,322.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v2) at (63.00 bp,250.00 bp) {2};\node (v2) at (63.00 bp,250.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v8) at (63.00 bp,178.00 bp) {8};\node (v8) at (63.00 bp,178.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v9) at (63.00 bp,106.00 bp) {9};\node (v9) at (63.00 bp,106.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v11) at (53.00 bp,34.00 bp) {11};\node (v11) at (53.00 bp,34.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v14) at (317.00 bp,178.00 bp) {14};\node (v14) at (317.00 bp,178.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v4) at (317.00 bp,106.00 bp) {4};\node (v4) at (317.00 bp,106.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v7) at (327.00 bp,34.00 bp) {7};\node (v7) at (327.00 bp,34.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v1) at (151.00 bp,322.00 bp) {1};\node (v1) at (151.00 bp,322.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v5) at (141.00 bp,250.00 bp) {5};\node (v5) at (141.00 bp,250.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v12) at (141.00 bp,178.00 bp) {12};\node (v12) at (141.00 bp,178.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v10) at (161.00 bp,106.00 bp) {10};\node (v10) at (161.00 bp,106.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v15) at (415.00 bp,178.00 bp) {15};\node (v15) at (415.00 bp,178.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v13) at (239.00 bp,178.00 bp) {13};\node (v13) at (239.00 bp,178.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v3) at (278.00 bp,250.00 bp) {3};\node (v3) at (278.00 bp,250.00 bp) [ellipse] {};
- \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v6) (v2) (v8) (v9) (v11) , inner sep=25pt] {};
- \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v14) (v4) (v7) , inner sep=25pt] {};
- \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v1) (v5) (v12) (v10) , inner sep=25pt] {};
- \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v15) , inner sep=25pt] {};
- \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v13) , inner sep=25pt] {};
- \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v3) , inner sep=25pt] {};
+% Edge: 9 -> 14
+\draw [->] (55.350bp,304.760bp) .. controls (59.575bp,296.550bp) and (64.808bp,286.370bp) .. (74.696bp,267.150bp);% Edge: 14 -> 7
+\draw [->] (83.000bp,231.700bp) .. controls (83.000bp,224.410bp) and (83.000bp,215.730bp) .. (83.000bp,196.100bp);% Edge: 14 -> 6
+\draw [->] (67.432bp,234.780bp) .. controls (59.681bp,226.630bp) and (51.106bp,215.710bp) .. (47.000bp,204.000bp) .. controls (40.527bp,185.550bp) and (42.579bp,179.050bp) .. (47.000bp,160.000bp) .. controls (49.150bp,150.730bp) and (53.159bp,141.220bp) .. (62.762bp,122.980bp);% Edge: 7 -> 6
+\draw [->] (80.528bp,159.700bp) .. controls (79.475bp,152.320bp) and (78.218bp,143.520bp) .. (75.443bp,124.100bp);% Edge: 6 -> 3
+\draw [->] (73.000bp,87.697bp) .. controls (73.000bp,80.407bp) and (73.000bp,71.726bp) .. (73.000bp,52.104bp);% Edge: 3 -> 9
+\draw [->] (59.250bp,49.931bp) .. controls (51.039bp,59.900bp) and (41.381bp,73.753bp) .. (37.000bp,88.000bp) .. controls (15.143bp,159.080bp) and (29.795bp,248.090bp) .. (42.429bp,303.840bp);% Edge: 4 -> 12
+\draw [->] (161.000bp,375.700bp) .. controls (161.000bp,368.410bp) and (161.000bp,359.730bp) .. (161.000bp,340.100bp);% Edge: 12 -> 13
+\draw [->] (155.120bp,304.050bp) .. controls (154.330bp,296.570bp) and (154.080bp,287.580bp) .. (155.140bp,267.790bp);% Edge: 13 -> 4
+\draw [->] (174.750bp,265.930bp) .. controls (182.960bp,275.900bp) and (192.620bp,289.750bp) .. (197.000bp,304.000bp) .. controls (202.750bp,322.690bp) and (203.470bp,329.550bp) .. (197.000bp,348.000bp) .. controls (194.180bp,356.050bp) and (189.240bp,363.730bp) .. (176.570bp,378.780bp);% Edge: 13 -> 12
+\draw [->] (166.860bp,267.790bp) .. controls (167.660bp,275.250bp) and (167.920bp,284.240bp) .. (166.880bp,304.050bp);% Edge: 8 -> 2
+\draw [->] (302.120bp,160.050bp) .. controls (301.330bp,152.570bp) and (301.080bp,143.580bp) .. (302.140bp,123.790bp);% Edge: 2 -> 8
+\draw [->] (313.860bp,123.790bp) .. controls (314.660bp,131.250bp) and (314.920bp,140.240bp) .. (313.880bp,160.050bp);% Edge: 2 -> 2
+\draw [->] (327.900bp,118.430bp) .. controls (340.690bp,121.680bp) and (353.000bp,117.530bp) .. (353.000bp,106.000bp) .. controls (353.000bp,97.982bp) and (347.050bp,93.536bp) .. (327.900bp,93.568bp);% Edge: 2 -> 1
+\draw [->] (312.600bp,88.055bp) .. controls (314.650bp,80.489bp) and (317.130bp,71.372bp) .. (322.440bp,51.789bp);% Edge: 1 -> 8
+\draw [->] (340.370bp,49.996bp) .. controls (348.360bp,59.991bp) and (357.750bp,73.849bp) .. (362.000bp,88.000bp) .. controls (366.600bp,103.320bp) and (368.190bp,109.250bp) .. (362.000bp,124.000bp) .. controls (356.500bp,137.120bp) and (345.990bp,148.620bp) .. (326.830bp,164.660bp);% Edge: 10 -> 5
+\draw [->] (284.160bp,376.050bp) .. controls (282.000bp,368.490bp) and (279.390bp,359.370bp) .. (273.800bp,339.790bp);% Edge: 5 -> 11
+\draw [->] (273.840bp,304.050bp) .. controls (276.000bp,296.490bp) and (278.610bp,287.370bp) .. (284.200bp,267.790bp);% Edge: 11 -> 10
+\draw [->] (295.490bp,267.900bp) .. controls (299.080bp,278.160bp) and (303.170bp,291.640bp) .. (305.000bp,304.000bp) .. controls (307.860bp,323.350bp) and (308.320bp,328.730bp) .. (305.000bp,348.000bp) .. controls (303.990bp,353.880bp) and (302.280bp,360.000bp) .. (296.490bp,376.270bp);% Edge: 4 -> 14
+\draw [->] (147.610bp,378.330bp) .. controls (140.320bp,369.870bp) and (131.500bp,358.800bp) .. (125.000bp,348.000bp) .. controls (111.570bp,325.680bp) and (100.120bp,298.290bp) .. (88.715bp,267.790bp);% Edge: 12 -> 14
+\draw [->] (145.590bp,307.170bp) .. controls (134.550bp,297.260bp) and (119.470bp,283.730bp) .. (98.645bp,265.040bp);% Edge: 13 -> 3
+\draw [->] (157.190bp,231.940bp) .. controls (150.100bp,201.860bp) and (133.370bp,137.880bp) .. (109.000bp,88.000bp) .. controls (104.250bp,78.270bp) and (97.900bp,68.275bp) .. (85.277bp,50.514bp);% Edge: 10 -> 8
+\draw [->] (298.300bp,376.800bp) .. controls (302.740bp,368.430bp) and (307.780bp,357.930bp) .. (311.000bp,348.000bp) .. controls (328.130bp,295.250bp) and (334.960bp,278.560bp) .. (325.000bp,224.000bp) .. controls (323.920bp,218.090bp) and (322.110bp,211.950bp) .. (315.950bp,195.680bp);% Edge: 10 -> 2
+\draw [->] (306.110bp,379.900bp) .. controls (315.390bp,371.780bp) and (326.140bp,360.530bp) .. (332.000bp,348.000bp) .. controls (359.200bp,289.820bp) and (342.500bp,268.200bp) .. (344.000bp,204.000bp) .. controls (344.460bp,184.450bp) and (349.750bp,178.690bp) .. (344.000bp,160.000bp) .. controls (340.820bp,149.650bp) and (334.850bp,139.510bp) .. (321.750bp,121.930bp);% Edge: 5 -> 2
+\draw [->] (262.510bp,304.100bp) .. controls (258.920bp,293.840bp) and (254.830bp,280.360bp) .. (253.000bp,268.000bp) .. controls (250.140bp,248.650bp) and (250.190bp,243.350bp) .. (253.000bp,224.000bp) .. controls (257.270bp,194.640bp) and (259.290bp,186.810bp) .. (272.000bp,160.000bp) .. controls (276.640bp,150.210bp) and (282.960bp,140.210bp) .. (295.610bp,122.460bp);% Edge: 11 -> 8
+\draw [->] (293.600bp,232.050bp) .. controls (295.650bp,224.490bp) and (298.130bp,215.370bp) .. (303.440bp,195.790bp);
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v9) at (47.00 bp,322.00 bp) {9};\node (v9) at (47.00 bp,322.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v14) at (83.00 bp,250.00 bp) {14};\node (v14) at (83.00 bp,250.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v7) at (83.00 bp,178.00 bp) {7};\node (v7) at (83.00 bp,178.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v6) at (73.00 bp,106.00 bp) {6};\node (v6) at (73.00 bp,106.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v3) at (73.00 bp,34.00 bp) {3};\node (v3) at (73.00 bp,34.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v4) at (161.00 bp,394.00 bp) {4};\node (v4) at (161.00 bp,394.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v12) at (161.00 bp,322.00 bp) {12};\node (v12) at (161.00 bp,322.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v13) at (161.00 bp,250.00 bp) {13};\node (v13) at (161.00 bp,250.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v8) at (308.00 bp,178.00 bp) {8};\node (v8) at (308.00 bp,178.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v2) at (308.00 bp,106.00 bp) {2};\node (v2) at (308.00 bp,106.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v1) at (327.00 bp,34.00 bp) {1};\node (v1) at (327.00 bp,34.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v10) at (289.00 bp,394.00 bp) {10};\node (v10) at (289.00 bp,394.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v5) at (269.00 bp,322.00 bp) {5};\node (v5) at (269.00 bp,322.00 bp) [ellipse] {};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v11) at (289.00 bp,250.00 bp) {11};\node (v11) at (289.00 bp,250.00 bp) [ellipse] {};
+ \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v9) (v14) (v7) (v6) (v3) , inner sep=25pt] {};
+ \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v4) (v12) (v13) , inner sep=25pt] {};
+ \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v8) (v2) (v1) , inner sep=25pt] {};
+ \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v10) (v5) (v11) , inner sep=25pt] {};
 \end{tikzpicture}
 \end{adjustbox}
 % End of code
-\\\\Обращение $G_r$ орграфа $G$:
-\vspace{2mm}
+\\\\Метаграф $G_r$ орграфа $G$:
+\vspace{8mm}
 
 % Start of code
-\begin{adjustbox}{max size={1.4\textwidth}{0,7\textheight}, center} % ограничиваем ширину и высоту
+\begin{adjustbox}{max size={1.4\textwidth}{0,4\textheight}, center} % ограничиваем ширину и высоту
 \begin{tikzpicture}[>=latex',line join=bevel,]
   \pgfsetlinewidth{1bp}
 %
 \pgfsetcolor{black}
-% Edge: 6 -> 11
-\draw [->] (55.472bp,303.700bp) .. controls (56.525bp,296.320bp) and (57.782bp,287.520bp) .. (60.557bp,268.100bp);% Edge: 2 -> 6
-\draw [->] (47.432bp,49.217bp) .. controls (39.681bp,57.370bp) and (31.106bp,68.293bp) .. (27.000bp,80.000bp) .. controls (1.834bp,162.200bp) and (4.441bp,191.860bp) .. (27.000bp,276.000bp) .. controls (28.826bp,282.810bp) and (31.961bp,289.660bp) .. (41.430bp,305.660bp);% Edge: 2 -> 8
-\draw [->] (68.862bp,51.789bp) .. controls (69.663bp,59.248bp) and (69.922bp,68.237bp) .. (68.878bp,88.055bp);% Edge: 8 -> 2
-\draw [->] (57.122bp,88.055bp) .. controls (56.328bp,80.574bp) and (56.076bp,71.579bp) .. (57.138bp,51.789bp);% Edge: 9 -> 8
-\draw [->] (63.000bp,159.700bp) .. controls (63.000bp,152.410bp) and (63.000bp,143.730bp) .. (63.000bp,124.100bp);% Edge: 11 -> 9
-\draw [->] (63.000bp,231.700bp) .. controls (63.000bp,224.410bp) and (63.000bp,215.730bp) .. (63.000bp,196.100bp);% Edge: 14 -> 4
-\draw [->] (334.480bp,306.340bp) .. controls (329.800bp,297.710bp) and (325.800bp,286.460bp) .. (324.000bp,276.000bp) .. controls (320.680bp,256.730bp) and (321.140bp,251.350bp) .. (324.000bp,232.000bp) .. controls (325.350bp,222.880bp) and (327.930bp,213.150bp) .. (335.580bp,194.040bp);% Edge: 14 -> 7
-\draw [->] (353.840bp,304.050bp) .. controls (356.000bp,296.490bp) and (358.610bp,287.370bp) .. (364.200bp,267.790bp);% Edge: 4 -> 14
-\draw [->] (350.220bp,196.370bp) .. controls (347.800bp,206.580bp) and (343.800bp,219.830bp) .. (342.000bp,232.000bp) .. controls (339.140bp,251.350bp) and (338.680bp,256.730bp) .. (342.000bp,276.000bp) .. controls (342.970bp,281.630bp) and (344.580bp,287.480bp) .. (349.510bp,303.850bp);% Edge: 7 -> 4
-\draw [->] (364.160bp,232.050bp) .. controls (362.000bp,224.490bp) and (359.390bp,215.370bp) .. (353.800bp,195.790bp);% Edge: 1 -> 10
-\draw [->] (258.530bp,231.700bp) .. controls (257.470bp,224.320bp) and (256.220bp,215.520bp) .. (253.440bp,196.100bp);% Edge: 5 -> 1
-\draw [->] (272.570bp,50.342bp) .. controls (278.110bp,58.649bp) and (284.150bp,69.368bp) .. (287.000bp,80.000bp) .. controls (300.350bp,129.800bp) and (298.650bp,145.780bp) .. (287.000bp,196.000bp) .. controls (284.850bp,205.270bp) and (280.840bp,214.780bp) .. (271.240bp,233.020bp);% Edge: 12 -> 5
-\draw [->] (253.470bp,87.697bp) .. controls (254.530bp,80.322bp) and (255.780bp,71.524bp) .. (258.560bp,52.104bp);% Edge: 10 -> 12
-\draw [->] (251.000bp,159.700bp) .. controls (251.000bp,152.410bp) and (251.000bp,143.730bp) .. (251.000bp,124.100bp);% Edge: 8 -> 3
-\draw [->] (80.681bp,91.834bp) .. controls (94.729bp,81.372bp) and (114.600bp,66.577bp) .. (139.400bp,48.107bp);% Edge: 9 -> 12
-\draw [->] (86.052bp,168.420bp) .. controls (118.890bp,156.190bp) and (179.360bp,133.680bp) .. (227.760bp,115.650bp);% Edge: 14 -> 3
-\draw [->] (321.820bp,320.080bp) .. controls (290.400bp,317.460bp) and (239.500bp,308.150bp) .. (212.000bp,276.000bp) .. controls (154.620bp,208.930bp) and (207.530bp,163.860bp) .. (180.000bp,80.000bp) .. controls (177.950bp,73.748bp) and (175.120bp,67.297bp) .. (166.800bp,51.137bp);% Edge: 4 -> 13
-\draw [->] (349.000bp,159.700bp) .. controls (349.000bp,152.410bp) and (349.000bp,143.730bp) .. (349.000bp,124.100bp);% Edge: 12 -> 3
-\draw [->] (233.320bp,91.834bp) .. controls (219.270bp,81.372bp) and (199.400bp,66.577bp) .. (174.600bp,48.107bp);% Edge: 10 -> 13
-\draw [->] (268.970bp,164.160bp) .. controls (283.760bp,153.600bp) and (304.940bp,138.470bp) .. (331.140bp,119.760bp);% Edge: 15 -> 3
-\draw [->] (144.960bp,87.697bp) .. controls (146.640bp,80.322bp) and (148.650bp,71.524bp) .. (153.090bp,52.104bp);
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v6) at (53.00 bp,322.00 bp) {6};\node (v6) at (53.00 bp,322.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v11) at (63.00 bp,250.00 bp) {11};\node (v11) at (63.00 bp,250.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v2) at (63.00 bp,34.00 bp) {2};\node (v2) at (63.00 bp,34.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v8) at (63.00 bp,106.00 bp) {8};\node (v8) at (63.00 bp,106.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v9) at (63.00 bp,178.00 bp) {9};\node (v9) at (63.00 bp,178.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v14) at (349.00 bp,322.00 bp) {14};\node (v14) at (349.00 bp,322.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v4) at (349.00 bp,178.00 bp) {4};\node (v4) at (349.00 bp,178.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v7) at (369.00 bp,250.00 bp) {7};\node (v7) at (369.00 bp,250.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v1) at (261.00 bp,250.00 bp) {1};\node (v1) at (261.00 bp,250.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v10) at (251.00 bp,178.00 bp) {10};\node (v10) at (251.00 bp,178.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v5) at (261.00 bp,34.00 bp) {5};\node (v5) at (261.00 bp,34.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v12) at (251.00 bp,106.00 bp) {12};\node (v12) at (251.00 bp,106.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v15) at (141.00 bp,106.00 bp) {15};\node (v15) at (141.00 bp,106.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v13) at (349.00 bp,106.00 bp) {13};\node (v13) at (349.00 bp,106.00 bp) [ellipse] {};
-\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v3) at (157.00 bp,34.00 bp) {3};\node (v3) at (157.00 bp,34.00 bp) [ellipse] {};
- \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v6) (v2) (v8) (v9) (v11) , inner sep=25pt] {};
- \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v14) (v4) (v7) , inner sep=25pt] {};
- \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v1) (v5) (v12) (v10) , inner sep=25pt] {};
- \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v15) , inner sep=25pt] {};
- \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v13) , inner sep=25pt] {};
- \node[draw, thick, blue, dashed, rounded corners=25pt, fit=(v3) , inner sep=25pt] {};
+% Edge: 4,12,13 -> 3,6,7,9,14
+\draw [->] (128.230bp,72.411bp) .. controls (133.770bp,64.335bp) and (140.560bp,54.431bp) .. (153.230bp,35.956bp);% Edge: 5,10,11 -> 3,6,7,9,14
+\draw [->] (201.480bp,72.411bp) .. controls (195.940bp,64.335bp) and (189.150bp,54.431bp) .. (176.480bp,35.956bp);
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v) at (29.86 bp,90.00 bp) {$\langle1,2,8\rangle$};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v) at (116.86 bp,90.00 bp) {$\langle4,12,13\rangle$};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v) at (164.86 bp,18.00 bp) {$\langle3,6,7,9,14\rangle$};
+\node[ellipse, draw, minimum width=54bp, minimum height=36bp] (v) at (212.86 bp,90.00 bp) {$\langle5,10,11\rangle$};
 \end{tikzpicture}
 \end{adjustbox}
 % End of code
- \vspace{4mm} 
-
- Обойдем $G_r$ в глубину и получим список его вершин в порядке убывания их post-значений: \{15, 4, 14, 7, 2, 6, 11, 9, 8, 1, 10, 13, 12, 5, 3 \}.\\Идя по списку, из каждой (ранее не посещенной) вершины обойдем $исходный$ орграф в глубину.
-Вершины, посещаемые при каждом новом обходе, будут давать отдельную ССК.
-\\(Здесь и далее ССК – сильно связная компонента).\\
-\begin{itemize}
-\item $visit($15$)$ дает ССК: $\langle 15 \rangle$\item $visit($4$)$ дает ССК: $\langle 4, 7, 14 \rangle$\item $visit($2$)$ дает ССК: $\langle 2, 8, 9, 11, 6 \rangle$\item $visit($1$)$ дает ССК: $\langle 1, 5, 12, 10 \rangle$\item $visit($13$)$ дает ССК: $\langle 13 \rangle$\item $visit($3$)$ дает ССК: $\langle 3 \rangle$
-\end{itemize}
-
-\vspace{0.5em}
-\textbf{Итого}: в орграфе $G$ ровно \textbf{6 ССК}:
-\begin{enumerate}
-\item $\langle 15 \rangle$\item $\langle 4, 7, 14 \rangle$\item $\langle 2, 8, 9, 11, 6 \rangle$\item $\langle 1, 5, 12, 10 \rangle$\item $\langle 13 \rangle$\item $\langle 3 \rangle$\end{enumerate}
-
+\\\\\\В метаграфе $G_r$ орграфа $G$ ровно \textbf{2 ребра}.
 
 \end{document}
 

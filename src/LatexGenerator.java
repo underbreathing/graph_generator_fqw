@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class LatexGenerator {
 
@@ -45,7 +46,7 @@ public class LatexGenerator {
                 """, true);
     }
 
-    public static void generateTask(TaskType taskType, List<Integer>[] adjList, int answer, int n) {
+    public static void generateTask(TaskType taskType, Set<Integer>[] adjList, int answer, int n) {
         String question;
         String sAnswer = "";
 
@@ -80,8 +81,12 @@ public class LatexGenerator {
 
         for (int i = 0; i < adjList.length; i++) {
             sVertices.append(i + 1).append(", ");
-            for (int j = 0; j < adjList[i].size(); j++) {
-                edges.append("(").append(i + 1).append(", ").append(adjList[i].get(j) + 1).append(")").append(", ");
+            for (int to : adjList[i]) {
+                edges.append("(")
+                        .append(i + 1)
+                        .append(", ")
+                        .append(to + 1)
+                        .append("), ");
             }
         }
         Utils.cleanTheTip(sVertices);

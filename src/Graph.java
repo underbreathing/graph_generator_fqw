@@ -1,15 +1,15 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Graph {
-    public List<Integer>[] adjList; 
+    public Set<Integer>[] adjList;
 
     @SuppressWarnings("unchecked")
     public Graph(int vertices) {
-        adjList = new List[vertices];
+        adjList = new Set[vertices];
 
         for (int i = 0; i < vertices; i++) {
-            adjList[i] = new ArrayList<>();
+            adjList[i] = new HashSet<>();
         }
     }
 
