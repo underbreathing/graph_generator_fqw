@@ -37,29 +37,29 @@ public class Algorithms {
     // и метаграф будем строить по ходу генерации исходного орграфа
     // правда маленькое затруднение, мы не знаем сколько будет вершин в метаграфе
     //сделать так - завести вектор с размером равным количеству вершин в орграфе а в конце сделать resizetoContent
-    public static MetaGraph generateMetaGraph(Graph myGraph, List<List<Integer>> sccs) {
-        MetaGraph metaGraph = new MetaGraph(sccs);
-
-        Map<Integer, Integer> sccIndexes = getSCCindexes(sccs);
-
-        Set<Graph.Edge> metaEdges = new HashSet<>();
-
-        Set<Integer>[] adj = myGraph.adjList;
-
-        for (int i = 0; i < adj.length; ++i) {
-            int thisSCC = sccIndexes.get(i); // ССК в которой лежит эта вершина
-            for (Integer vertex : adj[i]) {
-                int otherSCC = sccIndexes.get(vertex);
-                if (thisSCC != otherSCC) {
-                    metaEdges.add(new Graph.Edge(thisSCC, otherSCC));
-                }
-            }
-        }
-        for (Graph.Edge edge : metaEdges) {
-            metaGraph.addNewEdge(edge);
-        }
-        return metaGraph;
-    }
+//    public static MetaGraph generateMetaGraph(Graph myGraph, List<List<Integer>> sccs) {
+//        MetaGraph metaGraph = new MetaGraph(sccs);
+//
+//        Map<Integer, Integer> sccIndexes = getSCCindexes(sccs);
+//
+//        Set<Graph.Edge> metaEdges = new HashSet<>();
+//
+//        Set<Integer>[] adj = myGraph.adjList;
+//
+//        for (int i = 0; i < adj.length; ++i) {
+//            int thisSCC = sccIndexes.get(i); // ССК в которой лежит эта вершина
+//            for (Integer vertex : adj[i]) {
+//                int otherSCC = sccIndexes.get(vertex);
+//                if (thisSCC != otherSCC) {
+//                    metaEdges.add(new Graph.Edge(thisSCC, otherSCC));
+//                }
+//            }
+//        }
+//        for (Graph.Edge edge : metaEdges) {
+//            metaGraph.addNewEdge(edge);
+//        }
+//        return metaGraph;
+//    }
 
     private static Map<Integer, Integer> getSCCindexes(List<List<Integer>> sccs) {
         Map<Integer, Integer> sccIndexes = new HashMap<>();

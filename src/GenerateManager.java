@@ -10,14 +10,10 @@ public class GenerateManager {
     public static void generate(GenerateParameters parameters, String outputFilePath) {
 
         int countOfNodes = Utils.rnd.nextInt(parameters.vmin(), parameters.vmax() + 1);
-        Graph myGraph = GraphGenerator.generateGraph(countOfNodes);
-        List<List<Integer>> sccs = GraphGenerator.getSCCs();
-        MetaGraph metaGraph = null;
         TaskType taskType = parameters.taskType();
-
-        if (taskType.equals(TaskType.METAGRAPH)) {
-            metaGraph = Algorithms.generateMetaGraph(myGraph, sccs);
-        }
+        Graph myGraph = GraphGenerator.generateGraph(countOfNodes, taskType.equals(TaskType.METAGRAPH));
+        List<List<Integer>> sccs = GraphGenerator.getSCCs();
+        MetaGraph metaGraph = GraphGenerator.metaGraph;
 
         myGraph.printAdjacencyList();
         System.out.println("ССК орграфа: " + sccs);
