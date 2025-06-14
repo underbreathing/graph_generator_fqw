@@ -90,7 +90,7 @@ public class Main {
 
     private static void runGui() {
         SwingUtilities.invokeLater(() -> {
-            frame = new JFrame("GraphGenerator");
+            frame = new JFrame("Генератор учебных заданий на нахождение ССК орграфов");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(700, 600);
 
@@ -100,7 +100,7 @@ public class Main {
 
             // Панель Vmin и Vmax с текстовыми полями для отображения значения
             JPanel vPanel = new JPanel(new GridBagLayout());
-            vPanel.setBorder(BorderFactory.createTitledBorder("Vertex Count"));
+            vPanel.setBorder(BorderFactory.createTitledBorder("Количество вершин"));
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.insets = new Insets(5, 5, 5, 5);
             gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -114,7 +114,7 @@ public class Main {
             vPanel.add(vminValueField, gbc);
 
             gbc.gridx = 1;
-            vPanel.add(new JLabel("Vmin (number of vertices):"), gbc);
+            vPanel.add(new JLabel("Vmin (кол-во вершин):"), gbc);
 
             gbc.gridx = 2;
             vminSlider = new JSlider(2, 20, SettingsCache.getVmin());
@@ -132,7 +132,7 @@ public class Main {
             vPanel.add(vmaxValueField, gbc);
 
             gbc.gridx = 1;
-            vPanel.add(new JLabel("Vmax (number of vertices):"), gbc);
+            vPanel.add(new JLabel("Vmax (кол-во вершин):"), gbc);
 
             gbc.gridx = 2;
             vmaxSlider = new JSlider(2, 25, SettingsCache.getVmax());
@@ -161,14 +161,14 @@ public class Main {
             });
 
             // Чекбоксы
-            answerCheck = new JCheckBox("Generate Answer");
+            answerCheck = new JCheckBox("Генерировать ответ");
             answerCheck.setSelected(SettingsCache.getGenAnswer());
             answerCheck.addActionListener(e -> {
                 SettingsCache.setGenAnswer(answerCheck.isSelected());
             });
 
             explanationPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            explanationPanel.setBorder(BorderFactory.createTitledBorder("uimodels.Explanation Detail"));
+            explanationPanel.setBorder(BorderFactory.createTitledBorder("Обоснование ответа"));
 
             explanationCombo = new JComboBox<>(Explanation.values());
             explanationCombo.setSelectedItem(SettingsCache.getGenExplanation());
@@ -179,21 +179,47 @@ public class Main {
                 }
             });
 
-            explanationPanel.add(new JLabel("uimodels.Explanation level:"));
+            explanationPanel.add(new JLabel("Уровень обоснования:"));
             explanationPanel.add(explanationCombo);
             mainPanel.add(explanationPanel);
 
             // Панель выбора LaTeX компилятора (кнопка + некликабельное поле)
             JPanel latexPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-            latexPanel.setBorder(BorderFactory.createTitledBorder("LaTeX Compiler Path"));
+            latexPanel.setBorder(BorderFactory.createTitledBorder("Путь к компилятору LaTeX"));
 
-            JButton browseButton = new JButton("Browse");
+            JButton browseButton = new JButton("Обзор");
             browseButton.setPreferredSize(new Dimension(100, 25)); // фиксированный размер кнопки
 
             latexPathField = new JTextField();
             latexPathField.setEditable(false);
             latexPathField.setPreferredSize(new Dimension(400, 25)); // фиксированная ширина текстового поля
             latexPathField.setText(SettingsCache.getLatexPath());
+
+            JPanel configPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
+            configPanel.setBorder(BorderFactory.createTitledBorder("Загрузить значения из properties файла"));
+
+            JButton configBrowseButton = new JButton("Обзор");
+            configBrowseButton.setPreferredSize(new Dimension(100, 25));
+
+            JTextField configPathField = new JTextField();
+            configPathField.setEditable(false);
+            configPathField.setPreferredSize(new Dimension(400, 25));
+// Можно сохранить и загружать путь, как с latexPathField, если нужно
+// configPathField.setText(SettingsCache.getPropertiesPath());
+
+            configBrowseButton.addActionListener(e -> {
+                JFileChooser fileChooser = new JFileChooser();
+                int result = fileChooser.showOpenDialog(frame);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    configPathField.setText(selectedFile.getAbsolutePath());
+                    // Если нужно — сохранить в SettingsCache:
+                    // SettingsCache.setPropertiesPath(selectedFile.getAbsolutePath());
+                }
+            });
+
+            configPanel.add(configBrowseButton, BorderLayout.WEST);
+            configPanel.add(configPathField, BorderLayout.CENTER);
 
             browseButton.addActionListener(e -> {
                 openFileManager();
@@ -204,8 +230,8 @@ public class Main {
 
             // SCC / Metagraph toggle
             JPanel togglePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            togglePanel.setBorder(BorderFactory.createTitledBorder("Task Type"));
-            togglePanel.add(new JLabel("Select:"));
+            togglePanel.setBorder(BorderFactory.createTitledBorder("Тип задания"));
+            togglePanel.add(new JLabel("Выбрать:"));
             taskToggle = new JComboBox<>(TaskType.values());
             taskToggle.setSelectedItem(SettingsCache.getTaskType());
             togglePanel.add(taskToggle);
@@ -214,14 +240,14 @@ public class Main {
             });
 
             // Кнопка Generate
-            JButton generateButton = new JButton("Generate");
+            JButton generateButton = new JButton("Сгенерировать");
             generateButton.addActionListener(e -> onGenerate());
 
             // Панель для числового ввода количества вариантов ответа
             JPanel optionsCountPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            optionsCountPanel.setBorder(BorderFactory.createTitledBorder("Answer Options Count"));
+            optionsCountPanel.setBorder(BorderFactory.createTitledBorder("Количество вариантов ответа"));
 
-            JLabel optionsLabel = new JLabel("Number of answer options (integer from 2 to 2^31 - 1):");
+            JLabel optionsLabel = new JLabel("(целое число от 2 до 2^31 - 1):");
             optionsField = new JTextField(10); // ширина поля
             optionsField.setText(String.valueOf(SettingsCache.getN()));
 
@@ -239,6 +265,7 @@ public class Main {
             mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
             mainPanel.add(latexPanel);
             mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+            mainPanel.add(configPanel);
             mainPanel.add(togglePanel);
             mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
             mainPanel.add(generateButton);
@@ -267,7 +294,7 @@ public class Main {
             fileChooser = new JFileChooser();
         }
 
-        fileChooser.setDialogTitle("Select pdfLaTeX Compiler (.exe)");
+        fileChooser.setDialogTitle("Выберите компилятор pdfLaTeX (.exe)");
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {

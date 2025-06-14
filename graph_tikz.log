@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.19)  9 JUN 2025 01:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.19)  14 JUN 2025 18:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -929,7 +929,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 28--29
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--90
+Underfull \hbox (badness 10000) in paragraph at lines 38--112
 
  []
 
@@ -938,41 +938,84 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--90
 [1
 
 {C:/Users/artem/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 92--108
+
+[2]
+
+LaTeX Warning: Command \cyri invalid in math mode on input line 188.
+
+
+LaTeX Warning: Command \cyrs invalid in math mode on input line 188.
+
+
+LaTeX Warning: Command \cyrh invalid in math mode on input line 188.
+
+
+LaTeX Warning: Command \cyro invalid in math mode on input line 188.
+
+
+LaTeX Warning: Command \cyrd invalid in math mode on input line 188.
+
+
+LaTeX Warning: Command \cyrn invalid in math mode on input line 188.
+
+
+LaTeX Warning: Command \cyrery invalid in math mode on input line 188.
+
+
+LaTeX Warning: Command \cyrishrt invalid in math mode on input line 188.
+
+Missing character: There is no è in font cmr10!
+Missing character: There is no ñ in font cmr10!
+Missing character: There is no õ in font cmr10!
+Missing character: There is no î in font cmr10!
+Missing character: There is no ä in font cmr10!
+Missing character: There is no í in font cmr10!
+Missing character: There is no û in font cmr10!
+Missing character: There is no é in font cmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 188--192
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 92--108
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 195--198
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 195--198
 
  []
 
 
 
-[2] (graph_tikz.aux)
+[4] (graph_tikz.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-14>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 18948 strings out of 469940
- 410959 string characters out of 5469409
- 806846 words of memory out of 5000000
- 45425 multiletter control sequences out of 15000+600000
- 628893 words of font info for 44 fonts, out of 8000000 for 9000
+ 19051 strings out of 469940
+ 412851 string characters out of 5469409
+ 861947 words of memory out of 5000000
+ 45527 multiletter control sequences out of 15000+600000
+ 629228 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 102i,8n,107p,441b,921s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\artem\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm10
-00.pk> <C:\Users\artem\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\la
-bx1000.pk><C:/Users/artem/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
-onts/cm/cmmi10.pfb><C:/Users/artem/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmmi7.pfb><C:/Users/artem/AppData/Local/Programs/MiKTeX/fonts/
-type1/public/amsfonts/cm/cmr10.pfb><C:/Users/artem/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on graph_tikz.pdf (2 pages, 66834 bytes).
+ 102i,8n,107p,557b,922s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\artem\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
+1000.pk> <C:\Users\artem\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\
+larm1000.pk> <C:\Users\artem\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi
+600\labx1000.pk><C:/Users/artem/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmmi10.pfb><C:/Users/artem/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmmi7.pfb><C:/Users/artem/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/artem/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on graph_tikz.pdf (4 pages, 86855 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
+ 133 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

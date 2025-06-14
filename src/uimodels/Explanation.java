@@ -7,6 +7,10 @@ public enum Explanation {
 
     @Override
     public String toString() {
-        return name().charAt(0) + name().substring(1).toLowerCase(); // Для красивого отображения
+        return switch (this) {
+            case DETAILED -> "Подробное";
+            case SHORT -> "Короткое";
+            case NO -> "Без обоснования";
+        };
     }
 }

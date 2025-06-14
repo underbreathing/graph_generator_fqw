@@ -1,12 +1,7 @@
-import jdk.jshell.execution.Util;
-import jnr.ffi.annotations.Meta;
-
 import java.util.*;
 import java.util.logging.Logger;
 
 public class GraphGenerator {
-
-    static final boolean isEnabledCycleInCycle = true;
 
     static MetaGraph metaGraph = null;
 
@@ -27,23 +22,21 @@ public class GraphGenerator {
             metaGraph = new MetaGraph(countOfNodes);
         }
         sccs.clear();
-        int remainingNodes = countOfNodes;//оставшиеся узлы
         List<Integer> nodeList = new ArrayList<>();
         for (int i = 0; i < countOfNodes; i++) {
             nodeList.add(i);
         }
         Collections.shuffle(nodeList);
 
-        while (remainingNodes > 0) {
+        while (!nodeList.isEmpty()) {
             List<Integer> newSCC = new ArrayList<>();
-            int newSSKSize = calculateNewSCCsize(remainingNodes);
+            int newSSKSize = calculateNewSCCsize(nodeList.size());
             for (int i = 0; i < newSSKSize; i++) {
                 newSCC.add(nodeList.remove(0));
             }
             linkSCCWithACycle(graph, newSCC);
             linkSCCToPreviousOnes(graph, newSCC, metaGraph);
             sccs.add(newSCC);
-            remainingNodes -= newSSKSize;
         }
 
         if (isMetagraphRequired) {
@@ -55,37 +48,58 @@ public class GraphGenerator {
         return graph;
     }
 
-    private static void linkSCCToPreviousOnes(Graph graph, List<Integer> newSCC, MetaGraph metagraph) {
+    private static void linkSCCToPreviousOnes(Graph graph, List<Integer> newSCC, MetaGraph metaGraph) {
         if (sccs.isEmpty()) return;
 
-        int newSCCindex = sccs.size();
+        List<Integer> selectedSCCindices = getRandomSubsetIndices(sccs);
 
-        List<List<Integer>> selectedSCCs = getRandomSubset(sccs);
-
-        int linkCount = generateCountOfLinks(calculateCountOfNodes(selectedSCCs));
-
-        // Собираем все возможные рёбра: newSCC -> уже созданные ССК
-        List<Graph.Edge> candidateEdges = new ArrayList<>();
-        for (List<Integer> previousSCC : selectedSCCs) {
-            for (int prev : previousSCC) {
-                for (int curr : newSCC) {
-                    candidateEdges.add(new Graph.Edge(curr, prev));
+        for (int currentIndex : selectedSCCindices) {
+            List<Integer> prevSCC = sccs.get(currentIndex);
+            int bound = Utils.rnd.nextInt(3) + 1; // TODO как будто избыточно. Потом подправим.
+            logger.info("Связываем текущую " + newSCC + " с предыдущими числом ребер = " + bound);
+            for (int i = 0; i < bound; ++i) { // повторяем цикл от 1 до 3 раз включительно
+                int prevV = prevSCC.get(Utils.rnd.nextInt(prevSCC.size()));
+                int newV = newSCC.get(Utils.rnd.nextInt(newSCC.size()));
+                graph.addNewEdge(newV, prevV);
+                if (metaGraph != null) {
+                    metaGraph.addNewEdge(sccs.size(), currentIndex);
                 }
             }
         }
-
-        Collections.shuffle(candidateEdges);
-
-        // Случайно выбираем нужное количество рёбер
-        for (int i = 0; i < linkCount; i++) {
-            Graph.Edge e = candidateEdges.get(i);
-            graph.addNewEdge(e);
-            if (metagraph != null) {
-                int prevSCCindex = findSubsetIndexContainingElement(selectedSCCs, e.to());
-                metagraph.addNewEdge(newSCCindex, prevSCCindex);
-            }
-        }
     }
+
+
+//    private static void linkSCCToPreviousOnes(Graph graph, List<Integer> newSCC, MetaGraph metagraph) {
+//        if (sccs.isEmpty()) return;
+//
+//        int newSCCindex = sccs.size();
+//
+//        List<List<Integer>> selectedSCCs = getRandomSubset(sccs);
+//
+//        int linkCount = generateCountOfLinks(calculateCountOfNodes(selectedSCCs));
+//
+//        // Собираем все возможные рёбра: newSCC -> уже созданные ССК
+//        List<Graph.Edge> candidateEdges = new ArrayList<>();
+//        for (List<Integer> previousSCC : selectedSCCs) {
+//            for (int prev : previousSCC) {
+//                for (int curr : newSCC) {
+//                    candidateEdges.add(new Graph.Edge(curr, prev));
+//                }
+//            }
+//        }
+//
+//        Collections.shuffle(candidateEdges);
+//
+//        // Случайно выбираем нужное количество рёбер
+//        for (int i = 0; i < linkCount; i++) {
+//            Graph.Edge e = candidateEdges.get(i);
+//            graph.addNewEdge(e);
+//            if (metagraph != null) {
+//                int prevSCCindex = findSubsetIndexContainingElement(selectedSCCs, e.to());
+//                metagraph.addNewEdge(newSCCindex, prevSCCindex);
+//            }
+//        }
+//    }
 
     public static int findSubsetIndexContainingElement(List<List<Integer>> listOfLists, int k) {
         for (int i = 0; i < listOfLists.size(); i++) {
@@ -115,28 +129,6 @@ public class GraphGenerator {
                 .mapToInt(List::size)
                 .sum();
     }
-
-//    private static void linkSCCToPreviousOnes(Graph graph, List<Integer> newSCC, MetaGraph metaGraph) {
-//        if (sccs.isEmpty()) return;
-//
-//        int sccsSize = sccs.size();
-//
-//        List<Integer> selectedSCCindices = getRandomSubsetIndices(sccs);
-//
-//        for (int i = 0; i < selectedSCCindices.size(); ++i) {
-//            int currentIndex = selectedSCCindices.get(i);
-//            List<Integer> selectedPrevious = getRandomSubset(sccs.get(currentIndex));
-//            List<Integer> selectedCurrent = getRandomSubset(newSCC);
-//            for (int prev : selectedPrevious) {
-//                for (int current : selectedCurrent) {
-//                    graph.addNewEdge(current, prev);
-//                    if (metaGraph != null) {
-//                        metaGraph.addNewEdge(sccsSize, currentIndex);
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     public static <T> List<Integer> getRandomSubsetIndices(List<T> list) {
         if (list == null || list.isEmpty()) {
@@ -178,11 +170,7 @@ public class GraphGenerator {
             int last = nextSCC.get(nextSCCsize - 1);
             int first = nextSCC.get(0);
             graph.addNewEdge(last, first);
-            if (isEnabledCycleInCycle) { //слева в условии фича тоггл
-                if (Utils.rnd.nextInt(1, 101) <= 75) {
-                    addInnerCycle(graph, nextSCC);
-                }
-            }
+            addInnerCycle(graph, nextSCC);
         }
 
     }
@@ -192,25 +180,14 @@ public class GraphGenerator {
 
         logger.info("size = " + size);
 
-        if (size == 1) {
-            if (Utils.rnd.nextBoolean()) {
-                graph.addNewEdge(nextSSC.get(0), nextSSC.get(0));
-            }
-            return;
-        }
-
-        int countOfInnerEdges = Utils.rnd.nextInt(1, size);
+        int countOfInnerEdges = Utils.rnd.nextInt(0, (size + 1) / 2); //TODO тут верхняя граница под вопросом. Хотя сейчас вроде норм
 
         logger.info("count of inner edges = " + countOfInnerEdges);
 
         for (int i = 0; i < countOfInnerEdges; ++i) {
             int a = nextSSC.get(Utils.rnd.nextInt(size));
             int b = nextSSC.get(Utils.rnd.nextInt(size));
-            if (Utils.rnd.nextBoolean()) {
-                graph.addNewEdge(a, b);
-            } else {
-                graph.addNewEdge(b, a);
-            }
+            graph.addNewEdge(b, a);
         }
     }
 
